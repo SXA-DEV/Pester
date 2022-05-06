@@ -660,8 +660,8 @@ parameters: .\Tests\Utility\ModuleUnit.Tests.ps1 srvNano16 -Name User01
 
 .Example
 Invoke-Pester -Script @{Script = $scriptText}
-This command runs all tests passed as string in $scriptText variable with no aditional parameters and arguments. This notation can be combined with 
-Invoke-Pester -Script D:\MyModule, @{ Path = '.\Tests\Utility\ModuleUnit.Tests.ps1'; Parameters = @{ Name = 'User01' }; Arguments = srvNano16  } 
+This command runs all tests passed as string in $scriptText variable with no aditional parameters and arguments. This notation can be combined with
+Invoke-Pester -Script D:\MyModule, @{ Path = '.\Tests\Utility\ModuleUnit.Tests.ps1'; Parameters = @{ Name = 'User01' }; Arguments = srvNano16  }
 if needed. This command can be used when tests and scripts are stored not on the FileSystem, but somewhere else, and it is impossible to provide a path to it.
 
 .Example
@@ -829,7 +829,7 @@ New-PesterOption
         try
         {
             Enter-CoverageAnalysis -CodeCoverage $CodeCoverage -PesterState $pester
-            Write-PesterStart $pester $Script
+            # Write-PesterStart $pester $Script
 
             $invokeTestScript = {
                 param (
@@ -862,11 +862,11 @@ New-PesterOption
                 }elseif(-not [string]::IsNullOrEmpty($testScript.Script)){
                     $testDesctiption = $testScript.Script
                 }
-                
+
                 try
                 {
                     $pester.EnterTestGroup($testDesctiption, 'Script')
-                    Write-Describe $testDesctiption -CommandUsed Script
+                    # Write-Describe $testDesctiption -CommandUsed Script
                     do
                     {
                         & $invokeTestScript -Path $testScript.Path -Script $testScript.Script -Arguments $testScript.Arguments -Parameters $testScript.Parameters
@@ -1002,7 +1002,7 @@ function ResolveTestScripts
             }
             else
             {
-                $unresolvedPath = [string] $object
+                # $unresolvedPath = [string] $object
                 $script         = [string] $object
                 $arguments      = @()
                 $parameters     = @{}
